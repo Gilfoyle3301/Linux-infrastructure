@@ -1,0 +1,27 @@
+- name: install packege
+  apt:
+    name:
+      - auditd
+      - audispd-plugins
+    state: present
+    update_cache: true
+
+- name: Change rsyslog.conf
+  copy:
+    src: files/etc/rsyslog.conf
+    dest: /etc/rsyslog.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart rsyslog
+
+- name: Change configs
+  copy:
+    src: files/etc/auditd.conf
+    dest: /etc/audit/auditd.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart auditd
+  
+    

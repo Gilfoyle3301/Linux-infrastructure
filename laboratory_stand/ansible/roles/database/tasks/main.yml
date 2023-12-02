@@ -1,0 +1,202 @@
+---
+- name: install packages
+  apt:
+    name:
+      - mysql-server
+      - mysql-client
+      - python3-dev
+      - libmysqlclient-dev
+      - python3-mysqldb
+      - auditd 
+      - audispd-plugins
+      - borgbackup
+    state: present
+    update_cache: true
+
+- name: copy backup mysql
+  template:
+    src: ../../../../data/mysql.sql
+    dest: /opt/
+
+- name: copy config files
+  template:
+    src: files/mysqld.cnf
+    dest: /etc/mysql/mysql.conf.d/ 
+  notify: restart mysql
+
+- name: update mysql root password for all root accounts
+  mysql_user:
+    check_implicit_admin: yes
+    login_user: root
+    login_password: "{{ mysql_password }}"
+    name: root
+    priv: '*.*:ALL,GRANT'
+    host: "{{ item }}"
+    host_all: true
+    password: "{{ mysql_password }}"
+  with_items:
+    - 127.0.0.1
+
+- name: update mysql root password for all root accounts for ipv6 lh
+  mysql_user:
+    check_implicit_admin: yes
+    login_user: root
+    login_password: "{{ mysql_password }}"
+    name: root
+    priv: '*.*:ALL,GRANT'
+    host: "{{ item }}"
+    host_all: true
+    password: "{{ mysql_password }}"
+  with_items:
+    - ::1
+    - localhost
+
+- name: Restore database
+  mysql_db:
+    check_implicit_admin: yes
+    login_user: 'root'
+    login_password: "{{ mysql_password }}"
+    name: all
+    state: import
+    target: /opt/mysql.sql
+
+
+- name: Create database user bwapp
+  mysql_user:
+    check_implicit_admin: yes
+    login_user: 'root'
+    login_password: "{{ mysql_password }}"
+    name: bwapp
+    password: rootbwapp
+    priv: '*.*:ALL,GRANT'
+    state: present
+
+- name: check if replication user exists
+  command: >
+    mysql
+      -uroot
+      -p'{{ mysql_password }}'
+      -e 'SELECT user FROM mysql.user where user="{{ replication_user }}"'
+  register: existed_replication_user
+
+- name: create replication user
+  command: >
+    mysql
+      -uroot
+      -p'{{ mysql_password }}'
+      -e 'CREATE USER "{{ replication_user }}" IDENTIFIED BY "{{ replication_password }}"'
+  when: existed_replication_user.stdout == ""
+
+- name: priviledges to replication user
+  command: >
+    mysql
+      -uroot
+      -p'{{ mysql_password }}'
+      -e 'GRANT REPLICATION SLAVE ON *.* TO "{{ replication_user }}"@"%";'
+  when: existed_replication_user.stdout == ""
+
+- name: change method cipher for user
+  command: >
+    mysql
+      -uroot
+      -p'{{ mysql_password }}'
+      -e 'ALTER USER "{{ replication_user }}"@"%" IDENTIFIED WITH mysql_native_password BY "{{ replication_password }}";'
+  when: existed_replication_user.stdout == ""
+
+- name: Clean artifact audisp
+  file:
+    state: absent
+    path: /etc/audisp
+
+- name: Copy audisp configs
+  copy:
+    src: 'files/etc/audisp'
+    dest: '/etc/'
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Copy auditd configs
+  copy:
+    src: 'files/etc/auditd.conf'
+    dest: '/etc/audit/'
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart auditd
+
+- name: Change rsyslog.conf
+  copy:
+    src: files/etc/rsyslog.conf
+    dest: /etc/rsyslog.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart rsyslog
+
+- name: Copy resolv.conf to the client
+  copy: 
+    src: ../../dns/files/clients/client-resolv.conf 
+    dest: /etc/resolv.conf 
+    owner: root 
+    group: root 
+    mode: 0644
+
+- name: copy ssh-data for backup
+  copy:
+    src: ../../../../data/ssh-clients/
+    dest: /root/.ssh/
+    owner: root
+    group: root
+
+- name: change DAC ssh
+  file:
+    path: /root/.ssh/{{ item }}
+    mode: 0600
+  with_items: 
+    - id_rsa
+    - authorized_keys
+    - known_hosts
+- name: copy template service
+  template:
+    src: ../../../../data/borg-backup.service.j2
+    dest: /etc/systemd/system/borg-backup.service
+
+- name: Copy service
+  template:
+    src: ./../../../data/borg-backup.timer
+    dest: /etc/systemd/system/borg-backup.timer
+
+- name: initialize borg if not already done
+  block:
+    - name: check status of borg repo
+      expect:
+        command: borg info borg@192.168.77.18:/var/backups/{{ repolabel }}
+        responses:
+          passphrase: "Cae^53&gd899"
+  rescue:
+  - name: initialize borg
+    expect:
+      command: borg init --encryption=repokey borg@192.168.77.18:/var/backups/{{ repolabel }}
+      responses:
+        passphrase:
+        - "{{ repopass }}"
+        - "{{ repopass }}"
+        - "n"
+        - ""
+
+- name: service reload backup
+  service:
+    name: '{{ item }}'
+    state: reloaded
+  with_items:
+    - borg-backup.service
+    - borg-backup.timer
+
+- name: Start borg-backup service
+  service:
+    name: '{{ item }}'
+    state: started
+  with_items:
+    - borg-backup.service
+    - borg-backup.timer 

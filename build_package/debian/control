@@ -1,0 +1,15 @@
+Source:                 nginx
+Section:                misc
+Priority:               optional
+Maintainer:             Gilfoyle <otus@gmail.com>
+Build-Depends:          libpcre3-dev,
+                        zlib1g-dev
+Standards-Version:      1.25.0
+Homepage:               https://nginx.org
+
+Package:                nginx
+Architecture:           amd64
+Provides:               nginx
+Description: NGINX packages.
+ The description can be written in several lines.
+ Each line have to be 73 chars maximum.

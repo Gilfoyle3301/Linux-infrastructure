@@ -1,0 +1,64 @@
+global:
+  scrape_interval: 15s
+  external_labels:
+      monitor: 'security.lab-monitor'
+scrape_configs:
+
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9090']
+
+  - job_name: "node_export"
+    static_configs:
+      - targets: ["localhost:9100"]
+
+  - job_name: "frontServer.security.lab"
+    scrape_interval: 5s
+    static_configs:
+      - targets: ["frontServer.security.lab:9100"]
+
+  - job_name: "nginx.security.lab"
+    scrape_interval: 5s
+    static_configs:
+      - targets: ["frontServer.security.lab:9113"]
+      
+  - job_name: "serverDNS.security.lab"
+    scrape_interval: 5s
+    static_configs:
+      - targets: ["serverDNS.security.lab:9100"]
+
+  - job_name: "logServer.security.lab"
+    scrape_interval: 5s
+    static_configs:
+      - targets: ["logServer.security.lab:9100"]
+
+  - job_name: "applicationServer.security.lab"
+    scrape_interval: 5s
+    static_configs:
+      - targets: ["applicationServer.security.lab:9100"]
+
+  - job_name: "applicationSlave.security.lab"
+    scrape_interval: 5s
+    static_configs:
+      - targets: ["applicationSlave.security.lab:9100"]
+
+  - job_name: "dataBaseServer.security.lab"
+    scrape_interval: 5s
+    static_configs:
+      - targets: ["dataBaseServer.security.lab:9100"]
+
+  - job_name: "dataBaseSlave.security.lab"
+    scrape_interval: 5s
+    static_configs:
+      - targets: ["dataBaseSlave.security.lab:9100"]
+
+  - job_name: "apacheOnMaster.security.lab"
+    scrape_interval: 5s
+    static_configs:
+      - targets: ["applicationServer.security.lab:9117"]
+
+  - job_name: "apacheOnSlave.security.lab"
+    scrape_interval: 5s
+    static_configs:
+      - targets: ["applicationSlave.security.lab:9117"]

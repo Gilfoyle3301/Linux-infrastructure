@@ -1,0 +1,13 @@
+  - name: install softs on CentOS
+    yum:
+      name:
+        - vim
+        - traceroute
+        - tcpdump
+        - net-tools
+      state: present
+      update_cache: true
+    when: (ansible_os_family == "RedHat")
+
+  - name: Include task
+    include_tasks: configure.yaml

@@ -1,0 +1,4 @@
+/run/** rw,
+/var/** rw,
+/var/bind/** rw,
+

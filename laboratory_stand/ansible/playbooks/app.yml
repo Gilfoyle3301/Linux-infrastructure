@@ -1,0 +1,14 @@
+- name: setup master
+  hosts: applicationServer
+  become: True
+  gather_facts: False
+  roles:
+    - role: ../roles/app
+      vars:
+         ansible_fqdn: applicationServer.security.lab
+         ssh_src: defaults/.ssh
+         ssh_dest: /home/vagrant/
+         sender: true
+         repolabel: application
+         repopass: Cae^53&gd899
+    - ../roles/prometheus-node-exporter

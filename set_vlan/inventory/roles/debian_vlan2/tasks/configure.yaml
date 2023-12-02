@@ -1,0 +1,11 @@
+ - name: set up vlan2
+   template:
+     src: 50-cloud-init.yaml.j2
+     dest: /etc/netplan/50-cloud-init.yaml 
+     owner: root
+     group: root
+     mode: 0644
+ 
+ - name: apply set up vlan2
+   shell: netplan apply
+   become: true

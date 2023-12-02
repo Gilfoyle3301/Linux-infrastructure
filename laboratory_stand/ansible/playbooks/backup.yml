@@ -1,0 +1,10 @@
+- name: setup backup
+  hosts: backupServer
+  become: True
+  gather_facts: False
+  roles:
+    - role: ../roles/backup
+      vars:
+         ansible_fqdn: backupServer.security.lab
+         sender: false
+    - ../roles/prometheus-node-exporter

@@ -1,0 +1,324 @@
+2023/06/17 05:20:31 [debug] 90122#0: epoll: fd:8 ev:0001 d:00007F7D924F1010
+2023/06/17 05:20:31 [debug] 90122#0: accept on 0.0.0.0:80, ready: 0
+2023/06/17 05:20:31 [debug] 90123#0: epoll: fd:8 ev:0001 d:000055CBD2CC2FD0
+2023/06/17 05:20:31 [debug] 90123#0: accept on 0.0.0.0:80, ready: 0
+2023/06/17 05:20:31 [debug] 90122#0: posix_memalign: 000055CBD2C48290:512 @16
+2023/06/17 05:20:31 [debug] 90122#0: *1 accept: 10.0.2.2:56925 fd:16
+2023/06/17 05:20:31 [debug] 90123#0: posix_memalign: 000055CBD2C48290:512 @16
+2023/06/17 05:20:31 [debug] 90122#0: *1 event timer add: 16: 60000:444120501
+2023/06/17 05:20:31 [debug] 90123#0: *2 accept: 10.0.2.2:56926 fd:10
+2023/06/17 05:20:31 [debug] 90122#0: *1 reusable connection: 1
+2023/06/17 05:20:31 [debug] 90122#0: *1 epoll add event: fd:16 op:1 ev:80002001
+2023/06/17 05:20:31 [debug] 90123#0: *2 event timer add: 10: 60000:444120501
+2023/06/17 05:20:31 [debug] 90122#0: timer delta: 14300
+2023/06/17 05:20:31 [debug] 90123#0: *2 reusable connection: 1
+2023/06/17 05:20:31 [debug] 90122#0: worker cycle
+2023/06/17 05:20:31 [debug] 90123#0: *2 epoll add event: fd:10 op:1 ev:80002001
+2023/06/17 05:20:31 [debug] 90122#0: epoll timer: 60000
+2023/06/17 05:20:31 [debug] 90123#0: timer delta: 14330
+2023/06/17 05:20:31 [debug] 90123#0: worker cycle
+2023/06/17 05:20:31 [debug] 90123#0: epoll timer: 60000
+2023/06/17 05:20:32 [debug] 90122#0: epoll: fd:16 ev:0001 d:00007F7D924F12B0
+2023/06/17 05:20:32 [debug] 90122#0: *1 http wait request handler
+2023/06/17 05:20:32 [debug] 90122#0: *1 malloc: 000055CBD2C2D060:1024
+2023/06/17 05:20:32 [debug] 90122#0: *1 recv: eof:0, avail:-1
+2023/06/17 05:20:32 [debug] 90122#0: *1 recv: fd:16 860 of 1024
+2023/06/17 05:20:32 [debug] 90122#0: *1 reusable connection: 0
+2023/06/17 05:20:32 [debug] 90122#0: *1 posix_memalign: 000055CBD2C44390:4096 @16
+2023/06/17 05:20:32 [debug] 90122#0: *1 http process request line
+2023/06/17 05:20:32 [debug] 90122#0: *1 http request line: "POST /action.php HTTP/1.1"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http uri: "/action.php"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http args: ""
+2023/06/17 05:20:32 [debug] 90122#0: *1 http exten: "php"
+2023/06/17 05:20:32 [debug] 90122#0: *1 posix_memalign: 000055CBD2C58390:4096 @16
+2023/06/17 05:20:32 [debug] 90122#0: *1 http process request header line
+2023/06/17 05:20:32 [debug] 90122#0: *1 http header: "Host: localhost:1580"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http header: "Connection: keep-alive"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http header: "Content-Length: 12"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http header: "Cache-Control: max-age=0"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http header: "sec-ch-ua: "Chromium";v="88", "Google Chrome";v="88", ";Not A Brand";v="99""
+2023/06/17 05:20:32 [debug] 90122#0: *1 http header: "sec-ch-ua-mobile: ?0"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http header: "Upgrade-Insecure-Requests: 1"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http header: "Origin: http://localhost:1580"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http header: "Content-Type: application/x-www-form-urlencoded"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http header: "User-Agent: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http header: "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http header: "Sec-Fetch-Site: same-origin"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http header: "Sec-Fetch-Mode: navigate"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http header: "Sec-Fetch-User: ?1"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http header: "Sec-Fetch-Dest: document"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http header: "Referer: http://localhost:1580/"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http header: "Accept-Encoding: gzip, deflate, br"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http header: "Accept-Language: en-US,en;q=0.9"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http header: "Cookie: jenkins-timestamper-offset=-28800000"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http header done
+2023/06/17 05:20:32 [debug] 90122#0: *1 event timer del: 16: 444120501
+2023/06/17 05:20:32 [debug] 90122#0: *1 generic phase: 0
+2023/06/17 05:20:32 [debug] 90122#0: *1 rewrite phase: 1
+2023/06/17 05:20:32 [debug] 90122#0: *1 test location: "/"
+2023/06/17 05:20:32 [debug] 90122#0: *1 test location: "50x.html"
+2023/06/17 05:20:32 [debug] 90122#0: *1 test location: ~ "\.(php|phar)(/.*)?$"
+2023/06/17 05:20:32 [debug] 90122#0: *1 using configuration "\.(php|phar)(/.*)?$"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http cl:12 max:1048576
+2023/06/17 05:20:32 [debug] 90122#0: *1 rewrite phase: 3
+2023/06/17 05:20:32 [debug] 90122#0: *1 post rewrite phase: 4
+2023/06/17 05:20:32 [debug] 90122#0: *1 generic phase: 5
+2023/06/17 05:20:32 [debug] 90122#0: *1 generic phase: 6
+2023/06/17 05:20:32 [debug] 90122#0: *1 generic phase: 7
+2023/06/17 05:20:32 [debug] 90122#0: *1 generic phase: 8
+2023/06/17 05:20:32 [debug] 90122#0: *1 access phase: 9
+2023/06/17 05:20:32 [debug] 90122#0: *1 access phase: 10
+2023/06/17 05:20:32 [debug] 90122#0: *1 access phase: 11
+2023/06/17 05:20:32 [debug] 90122#0: *1 post access phase: 12
+2023/06/17 05:20:32 [debug] 90122#0: *1 generic phase: 13
+2023/06/17 05:20:32 [debug] 90122#0: *1 generic phase: 14
+2023/06/17 05:20:32 [debug] 90122#0: *1 http client request body preread 12
+2023/06/17 05:20:32 [debug] 90122#0: *1 http request body content length filter
+2023/06/17 05:20:32 [debug] 90122#0: *1 http body new buf t:1 f:0 000055CBD2C2D3B0, pos 000055CBD2C2D3B0, size: 12 file: 0, size: 0
+2023/06/17 05:20:32 [debug] 90122#0: *1 http init upstream, client timer: 0
+2023/06/17 05:20:32 [debug] 90122#0: *1 epoll add event: fd:16 op:3 ev:80002005
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script copy: "QUERY_STRING"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "QUERY_STRING: "
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script copy: "REQUEST_METHOD"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script var: "POST"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "REQUEST_METHOD: POST"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script copy: "CONTENT_TYPE"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script var: "application/x-www-form-urlencoded"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "CONTENT_TYPE: application/x-www-form-urlencoded"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script copy: "CONTENT_LENGTH"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script var: "12"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "CONTENT_LENGTH: 12"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script copy: "SCRIPT_NAME"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script var: "/action.php"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "SCRIPT_NAME: /action.php"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script copy: "REQUEST_URI"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script var: "/action.php"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "REQUEST_URI: /action.php"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script copy: "DOCUMENT_URI"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script var: "/action.php"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "DOCUMENT_URI: /action.php"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script copy: "DOCUMENT_ROOT"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script var: "/usr/share/nginx/html"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "DOCUMENT_ROOT: /usr/share/nginx/html"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script copy: "SERVER_PROTOCOL"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script var: "HTTP/1.1"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "SERVER_PROTOCOL: HTTP/1.1"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script copy: "REQUEST_SCHEME"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script var: "http"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "REQUEST_SCHEME: http"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script copy: ""
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script copy: "GATEWAY_INTERFACE"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script copy: "CGI/1.1"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "GATEWAY_INTERFACE: CGI/1.1"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script copy: "SERVER_SOFTWARE"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script copy: "nginx/"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script var: "1.18.0"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "SERVER_SOFTWARE: nginx/1.18.0"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script copy: "REMOTE_ADDR"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script var: "10.0.2.2"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "REMOTE_ADDR: 10.0.2.2"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script copy: "REMOTE_PORT"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script var: "56925"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "REMOTE_PORT: 56925"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script copy: "SERVER_ADDR"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script var: "10.0.2.15"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "SERVER_ADDR: 10.0.2.15"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script copy: "SERVER_PORT"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script var: "80"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "SERVER_PORT: 80"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script copy: "SERVER_NAME"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script var: "_"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "SERVER_NAME: _"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script copy: "REDIRECT_STATUS"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script copy: "200"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "REDIRECT_STATUS: 200"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script copy: "SCRIPT_FILENAME"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script var: "/usr/share/nginx/html"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script var: "/action.php"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "SCRIPT_FILENAME: /usr/share/nginx/html/action.php"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script copy: "PATH_INFO"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http script var: ""
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "PATH_INFO: "
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "HTTP_HOST: localhost:1580"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "HTTP_CONNECTION: keep-alive"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "HTTP_CONTENT_LENGTH: 12"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "HTTP_CACHE_CONTROL: max-age=0"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "HTTP_SEC_CH_UA: "Chromium";v="88", "Google Chrome";v="88", ";Not A Brand";v="99""
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "HTTP_SEC_CH_UA_MOBILE: ?0"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "HTTP_UPGRADE_INSECURE_REQUESTS: 1"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "HTTP_ORIGIN: http://localhost:1580"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "HTTP_CONTENT_TYPE: application/x-www-form-urlencoded"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "HTTP_USER_AGENT: Mozilla/5.0 (Windows NT 10.0; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.182 Safari/537.36"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "HTTP_ACCEPT: text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "HTTP_SEC_FETCH_SITE: same-origin"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "HTTP_SEC_FETCH_MODE: navigate"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "HTTP_SEC_FETCH_USER: ?1"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "HTTP_SEC_FETCH_DEST: document"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "HTTP_REFERER: http://localhost:1580/"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "HTTP_ACCEPT_ENCODING: gzip, deflate, br"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "HTTP_ACCEPT_LANGUAGE: en-US,en;q=0.9"
+2023/06/17 05:20:32 [debug] 90122#0: *1 fastcgi param: "HTTP_COOKIE: jenkins-timestamper-offset=-28800000"
+2023/06/17 05:20:32 [debug] 90122#0: *1 posix_memalign: 000055CBD2C4E630:4096 @16
+2023/06/17 05:20:32 [debug] 90122#0: *1 http cleanup add: 000055CBD2C4E760
+2023/06/17 05:20:32 [debug] 90122#0: *1 get rr peer, try: 1
+2023/06/17 05:20:32 [debug] 90122#0: *1 stream socket 17
+2023/06/17 05:20:32 [debug] 90122#0: *1 epoll add connection: fd:17 ev:80002005
+2023/06/17 05:20:32 [debug] 90122#0: *1 connect to unix:/run/php-fpm/www.sock, fd:17 #3
+2023/06/17 05:20:32 [debug] 90122#0: *1 connected
+2023/06/17 05:20:32 [debug] 90122#0: *1 http upstream connect: 0
+2023/06/17 05:20:32 [debug] 90122#0: *1 posix_memalign: 000055CBD2C56AF0:128 @16
+2023/06/17 05:20:32 [debug] 90122#0: *1 http upstream send request
+2023/06/17 05:20:32 [debug] 90122#0: *1 http upstream send request body
+2023/06/17 05:20:32 [debug] 90122#0: *1 chain writer buf fl:0 s:1400
+2023/06/17 05:20:32 [debug] 90122#0: *1 chain writer buf fl:0 s:12
+2023/06/17 05:20:32 [debug] 90122#0: *1 chain writer buf fl:0 s:12
+2023/06/17 05:20:32 [debug] 90122#0: *1 chain writer in: 000055CBD2C4E7D0
+2023/06/17 05:20:32 [debug] 90122#0: *1 writev: 1424 of 1424
+2023/06/17 05:20:32 [debug] 90122#0: *1 chain writer out: 0000000000000000
+2023/06/17 05:20:32 [debug] 90122#0: *1 event timer add: 17: 60000:444121630
+2023/06/17 05:20:32 [debug] 90122#0: *1 http finalize request: -4, "/action.php?" a:1, c:2
+2023/06/17 05:20:32 [debug] 90122#0: *1 http request count:2 blk:0
+2023/06/17 05:20:32 [debug] 90122#0: timer delta: 1129
+2023/06/17 05:20:32 [debug] 90122#0: worker cycle
+2023/06/17 05:20:32 [debug] 90122#0: epoll timer: 60000
+2023/06/17 05:20:32 [debug] 90122#0: epoll: fd:16 ev:0004 d:00007F7D924F12B0
+2023/06/17 05:20:32 [debug] 90122#0: *1 http run request: "/action.php?"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http upstream check client, write event:1, "/action.php"
+2023/06/17 05:20:32 [debug] 90122#0: epoll: fd:17 ev:0004 d:00007F7D924F1390
+2023/06/17 05:20:32 [debug] 90122#0: *1 http upstream request: "/action.php?"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http upstream dummy handler
+2023/06/17 05:20:32 [debug] 90122#0: timer delta: 2
+2023/06/17 05:20:32 [debug] 90122#0: worker cycle
+2023/06/17 05:20:32 [debug] 90122#0: epoll timer: 59998
+2023/06/17 05:20:32 [debug] 90122#0: epoll: fd:17 ev:2005 d:00007F7D924F1390
+2023/06/17 05:20:32 [debug] 90122#0: *1 http upstream request: "/action.php?"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http upstream process header
+2023/06/17 05:20:32 [debug] 90122#0: *1 malloc: 000055CBD2C4F640:4096
+2023/06/17 05:20:32 [debug] 90122#0: *1 recv: eof:1, avail:-1
+2023/06/17 05:20:32 [debug] 90122#0: *1 recv: fd:17 168 of 4096
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi record byte: 01
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi record byte: 07
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi record byte: 00
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi record byte: 01
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi record byte: 00
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi record byte: 16
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi record byte: 02
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi record byte: 00
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi record length: 22
+2023/06/17 05:20:32 [error] 90122#0: *1 FastCGI sent in stderr: "Primary script unknown" while reading response header from upstream, client: 10.0.2.2, server: _, request: "POST /action.php HTTP/1.1", upstream: "fastcgi://unix:/run/php-fpm/www.sock:", host: "localhost:1580", referrer: "http://localhost:1580/"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi record byte: 01
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi record byte: 06
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi record byte: 00
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi record byte: 01
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi record byte: 00
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi record byte: 6B
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi record byte: 05
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi record byte: 00
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi record length: 107
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi parser: 0
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi header: "Status: 404 Not Found"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi parser: 0
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi header: "X-Powered-By: PHP/7.4.15"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi parser: 0
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi header: "Content-type: text/html; charset=UTF-8"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi parser: 1
+2023/06/17 05:20:32 [debug] 90122#0: *1 http fastcgi header done
+2023/06/17 05:20:32 [debug] 90122#0: *1 finalize http upstream request: 404
+2023/06/17 05:20:32 [debug] 90122#0: *1 finalize http fastcgi request
+2023/06/17 05:20:32 [debug] 90122#0: *1 free rr peer 1 0
+2023/06/17 05:20:32 [debug] 90122#0: *1 close http upstream connection: 17
+2023/06/17 05:20:32 [debug] 90122#0: *1 free: 000055CBD2C56AF0, unused: 48
+2023/06/17 05:20:32 [debug] 90122#0: *1 event timer del: 17: 444121630
+2023/06/17 05:20:32 [debug] 90122#0: *1 reusable connection: 0
+2023/06/17 05:20:32 [debug] 90122#0: *1 http finalize request: 404, "/action.php?" a:1, c:1
+2023/06/17 05:20:32 [debug] 90122#0: *1 http special response: 404, "/action.php?"
+2023/06/17 05:20:32 [debug] 90122#0: *1 internal redirect: "/404.html?"
+2023/06/17 05:20:32 [debug] 90122#0: *1 rewrite phase: 1
+2023/06/17 05:20:32 [debug] 90122#0: *1 test location: "/"
+2023/06/17 05:20:32 [debug] 90122#0: *1 test location: "50x.html"
+2023/06/17 05:20:32 [debug] 90122#0: *1 test location: "40x.html"
+2023/06/17 05:20:32 [debug] 90122#0: *1 test location: ~ "\.(php|phar)(/.*)?$"
+2023/06/17 05:20:32 [debug] 90122#0: *1 test location: ~ "\.php$"
+2023/06/17 05:20:32 [debug] 90122#0: *1 using configuration "/"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http cl:12 max:1048576
+2023/06/17 05:20:32 [debug] 90122#0: *1 rewrite phase: 3
+2023/06/17 05:20:32 [debug] 90122#0: *1 post rewrite phase: 4
+2023/06/17 05:20:32 [debug] 90122#0: *1 generic phase: 5
+2023/06/17 05:20:32 [debug] 90122#0: *1 generic phase: 6
+2023/06/17 05:20:32 [debug] 90122#0: *1 generic phase: 7
+2023/06/17 05:20:32 [debug] 90122#0: *1 generic phase: 8
+2023/06/17 05:20:32 [debug] 90122#0: *1 access phase: 9
+2023/06/17 05:20:32 [debug] 90122#0: *1 access phase: 10
+2023/06/17 05:20:32 [debug] 90122#0: *1 access phase: 11
+2023/06/17 05:20:32 [debug] 90122#0: *1 post access phase: 12
+2023/06/17 05:20:32 [debug] 90122#0: *1 generic phase: 13
+2023/06/17 05:20:32 [debug] 90122#0: *1 generic phase: 14
+2023/06/17 05:20:32 [debug] 90122#0: *1 content phase: 15
+2023/06/17 05:20:32 [debug] 90122#0: *1 content phase: 16
+2023/06/17 05:20:32 [debug] 90122#0: *1 content phase: 17
+2023/06/17 05:20:32 [debug] 90122#0: *1 content phase: 18
+2023/06/17 05:20:32 [debug] 90122#0: *1 content phase: 19
+2023/06/17 05:20:32 [debug] 90122#0: *1 content phase: 20
+2023/06/17 05:20:32 [debug] 90122#0: *1 http filename: "/www/html/404.html"
+2023/06/17 05:20:32 [debug] 90122#0: *1 add cleanup: 000055CBD2C4EA78
+2023/06/17 05:20:32 [error] 90122#0: *1 open() "/www/html/404.html" failed (2: No such file or directory), client: 10.0.2.2, server: _, request: "POST /action.php HTTP/1.1", upstream: "fastcgi://unix:/run/php-fpm/www.sock", host: "localhost:1580", referrer: "http://localhost:1580/"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http finalize request: 404, "/404.html?" a:1, c:2
+2023/06/17 05:20:32 [debug] 90122#0: *1 http special response: 404, "/404.html?"
+2023/06/17 05:20:32 [debug] 90122#0: *1 HTTP/1.1 404 Not Found
+Server: nginx/1.18.0
+Date: Sat, 20 Feb 2021 14:20:32 GMT
+Content-Type: text/html
+Content-Length: 555
+Connection: keep-alive
+
+2023/06/17 05:20:32 [debug] 90122#0: *1 write new buf t:1 f:0 000055CBD2C4EAF8, pos 000055CBD2C4EAF8, size: 155 file: 0, size: 0
+2023/06/17 05:20:32 [debug] 90122#0: *1 http write filter: l:0 f:0 s:155
+2023/06/17 05:20:32 [debug] 90122#0: *1 http output filter "/404.html?"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http copy filter: "/404.html?"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http postpone filter "/404.html?" 000055CBD2C4E7B0
+2023/06/17 05:20:32 [debug] 90122#0: *1 write old buf t:1 f:0 000055CBD2C4EAF8, pos 000055CBD2C4EAF8, size: 155 file: 0, size: 0
+2023/06/17 05:20:32 [debug] 90122#0: *1 write new buf t:0 f:0 0000000000000000, pos 000055CBD1119520, size: 100 file: 0, size: 0
+2023/06/17 05:20:32 [debug] 90122#0: *1 write new buf t:0 f:0 0000000000000000, pos 000055CBD1119C80, size: 53 file: 0, size: 0
+2023/06/17 05:20:32 [debug] 90122#0: *1 write new buf t:0 f:0 0000000000000000, pos 000055CBD1119A60, size: 402 file: 0, size: 0
+2023/06/17 05:20:32 [debug] 90122#0: *1 http write filter: l:1 f:0 s:710
+2023/06/17 05:20:32 [debug] 90122#0: *1 http write filter limit 0
+2023/06/17 05:20:32 [debug] 90122#0: *1 writev: 710 of 710
+2023/06/17 05:20:32 [debug] 90122#0: *1 http write filter 0000000000000000
+2023/06/17 05:20:32 [debug] 90122#0: *1 http copy filter: 0 "/404.html?"
+2023/06/17 05:20:32 [debug] 90122#0: *1 http finalize request: 0, "/404.html?" a:1, c:2
+2023/06/17 05:20:32 [debug] 90122#0: *1 http request count:2 blk:0
+2023/06/17 05:20:32 [debug] 90122#0: *1 http finalize request: -4, "/404.html?" a:1, c:1
+2023/06/17 05:20:32 [debug] 90122#0: *1 set http keepalive handler
+2023/06/17 05:20:32 [debug] 90122#0: *1 http close request
+2023/06/17 05:20:32 [debug] 90122#0: *1 http log handler
+2023/06/17 05:20:32 [debug] 90122#0: *1 free: 000055CBD2C4F640
+2023/06/17 05:20:32 [debug] 90122#0: *1 free: 000055CBD2C44390, unused: 0
+2023/06/17 05:20:32 [debug] 90122#0: *1 free: 000055CBD2C58390, unused: 0
+2023/06/17 05:20:32 [debug] 90122#0: *1 free: 000055CBD2C4E630, unused: 2074
+2023/06/17 05:20:32 [debug] 90122#0: *1 free: 000055CBD2C2D060
+2023/06/17 05:20:32 [debug] 90122#0: *1 hc free: 0000000000000000
+2023/06/17 05:20:32 [debug] 90122#0: *1 hc busy: 0000000000000000 0
+2023/06/17 05:20:32 [debug] 90122#0: *1 tcp_nodelay
+2023/06/17 05:20:32 [debug] 90122#0: *1 reusable connection: 1
+2023/06/17 05:20:32 [debug] 90122#0: *1 event timer add: 16: 65000:444126632
+2023/06/17 05:20:32 [debug] 90122#0: timer delta: 0
+2023/06/17 05:20:32 [debug] 90122#0: worker cycle
+2023/06/17 05:20:32 [debug] 90122#0: epoll timer: 65000
+2023/06/17 05:21:31 [debug] 90123#0: timer delta: 60061
+2023/06/17 05:21:31 [debug] 90123#0: *2 event timer del: 10: 444120501
+2023/06/17 05:21:31 [debug] 90123#0: *2 http wait request handler
+2023/06/17 05:21:31 [info] 90123#0: *2 client timed out (110: Connection timed out) while waiting for request, client: 10.0.2.2, server: 0.0.0.0:80
+2023/06/17 05:21:31 [debug] 90123#0: *2 close http connection: 10
+2023/06/17 05:21:31 [debug] 90123#0: *2 reusable connection: 0
+2023/06/17 05:21:31 [debug] 90123#0: *2 free: 000055CBD2C48290, unused: 232
+2023/06/17 05:21:31 [debug] 90123#0: worker cycle
+2023/06/17 05:21:31 [debug] 90123#0: epoll timer: -1
+2023/06/17 05:21:37 [debug] 90122#0: timer delta: 65022
+2023/06/17 05:21:37 [debug] 90122#0: *1 event timer del: 16: 444126632
+2023/06/17 05:21:37 [debug] 90122#0: *1 http keepalive handler
+2023/06/17 05:21:37 [debug] 90122#0: *1 close http connection: 16
+2023/06/17 05:21:37 [debug] 90122#0: *1 reusable connection: 0
+2023/06/17 05:21:37 [debug] 90122#0: *1 free: 0000000000000000
+2023/06/17 05:21:37 [debug] 90122#0: *1 free: 000055CBD2C48290, unused: 120
+2023/06/17 05:21:37 [debug] 90122#0: worker cycle
+2023/06/17 05:21:37 [debug] 90122#0: epoll timer: -1

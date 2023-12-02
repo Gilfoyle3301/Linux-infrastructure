@@ -1,0 +1,93 @@
+{
+   "_comment": "Build with `packer build ubuntu.json`",
+   "variables": {
+       "cpus": "1",
+       "disable_ipv6": "true",
+       "disk_size": "20000",
+       "headless": "true",
+       "http_proxy": "{{env `http_proxy`}}",
+       "https_proxy": "{{env `https_proxy`}}",
+       "iso_checksum_type": "sha256",
+       "iso_name": "ubuntu-20.04.6-live-server-amd64.iso",
+       "iso_checksum": "b8f31413336b9393ad5d8ef0282717b2ab19f007df2e9ed5196c13d8f9153c8b",
+       "iso_url": "https://releases.ubuntu.com/focal/ubuntu-20.04.6-live-server-amd64.iso",
+       "memory": "3096",
+       "no_proxy": "{{env `no_proxy`}}",
+       "ssh_password": "vagrant",
+       "ssh_username": "vagrant",
+       "update": "true",
+       "vagrantfile_template": "",
+       "version": "0.1",
+       "virtualbox_guest_os_type": "Ubuntu_64",
+       "vm_name": "ubuntu-20.04"
+   },
+   "builders": [{
+       "boot_command": [
+           "<enter><enter><f6><esc><wait>",
+           "autoinstall ds=nocloud-net;s=http://{{.HTTPIP}}:{{.HTTPPort}}/",
+           "<enter>"
+       ],
+       "boot_wait": "5s",
+       "disk_size": "{{user `disk_size`}}",
+       "guest_additions_path": "VBoxGuestAdditions_{{.Version}}.iso",
+       "guest_os_type": "{{user `virtualbox_guest_os_type`}}",
+       "hard_drive_interface": "sata",
+       "headless": "{{user `headless`}}",
+       "http_directory": "http",
+       "iso_checksum": "{{user `iso_checksum_type`}}:{{user `iso_checksum`}}",
+       "iso_urls": [
+           "iso/{{user `iso_name`}}",
+           "{{user `iso_url`}}"
+       ],
+       "output_directory": "output-{{user `vm_name`}}-virtualbox-iso",
+       "shutdown_command": "echo '{{user `ssh_password`}}'|sudo -S shutdown -P now",
+       "ssh_handshake_attempts": "20",
+       "ssh_password": "{{user `ssh_password`}}",
+       "ssh_username": "{{user `ssh_username`}}",
+       "ssh_pty": true,
+       "ssh_timeout": "1h",
+       "type": "virtualbox-iso",
+       "vboxmanage": [
+           ["modifyvm", "{{.Name}}", "--audio", "none"],
+           ["modifyvm", "{{.Name}}", "--usb", "off"],
+           ["modifyvm", "{{.Name}}", "--vram", "16"],
+           ["modifyvm", "{{.Name}}", "--vrde", "off"],
+           ["modifyvm", "{{.Name}}", "--nictype1", "virtio"],
+           ["modifyvm", "{{.Name}}", "--memory", "{{user `memory`}}"],
+           ["modifyvm", "{{.Name}}", "--cpus", "{{user `cpus`}}"]
+       ],
+       "virtualbox_version_file": ".vbox_version",
+       "vm_name": "{{user `vm_name`}}"
+   }],
+   "provisioners": [{
+       "environment_vars": [
+           "DEBIAN_FRONTEND=noninteractive",
+           "UPDATE={{user `update`}}",
+           "DISABLE_IPV6={{user `disable_ipv6`}}",
+           "SSH_USERNAME={{user `ssh_username`}}",
+           "SSH_PASSWORD={{user `ssh_password`}}",
+           "http_proxy={{user `http_proxy`}}",
+           "https_proxy={{user `https_proxy`}}",
+           "no_proxy={{user `no_proxy`}}"
+       ],
+       "execute_command": "echo '{{user `ssh_password`}}'|{{.Vars}} sudo -E -S bash '{{.Path}}'",
+       "expect_disconnect": true,
+       "scripts": [
+           "scripts/init.sh",
+           "scripts/update.sh",
+           "scripts/vagrant.sh",
+           "scripts/virtualbox.sh",
+           "scripts/motd.sh",
+           "scripts/minimize.sh",
+           "scripts/cleanup.sh"
+           
+       ],
+       "type": "shell"
+   }],
+   "post-processors": [{
+       "keep_input_artifact": false,
+       "output": "box/{{.Provider}}/{{user `vm_name`}}-{{user `version`}}.box",
+       "type": "vagrant",
+       "vagrantfile_template": "{{user `vagrantfile_template`}}"
+   }]
+}

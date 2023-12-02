@@ -1,0 +1,28 @@
+
+server {
+
+	listen 443 ssl default_server;
+	ssl_certificate      /etc/nginx/ssl/nginx.crt;
+    ssl_certificate_key  /etc/nginx/ssl/nginx.key;
+	root /var/www/html;
+
+	index index.html index.htm index.nginx-debian.html;
+
+	server_name *.security.lab;
+
+	location / {
+        proxy_pass http://application;
+	}
+
+}
+server {
+	listen 8080;
+	location = /nginx_stats {
+ 		stub_status;  
+ 		allow 127.0.0.1;
+ 		deny all; 
+	}
+
+}
+
+

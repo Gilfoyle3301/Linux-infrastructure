@@ -1,0 +1,7 @@
+[vpn]
+master ansible_host=127.0.0.1 ansible_port=2222 ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/server-master/virtualbox/private_key 
+slave ansible_host=127.0.0.1 ansible_port=2200 ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/server-slave/virtualbox/private_key
+[ras_serv]
+master ansible_host=127.0.0.1 ansible_port=2222 ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/server-master/virtualbox/private_key 
+[ras_client]
+slave ansible_host=127.0.0.1 ansible_port=2200 ansible_user=vagrant ansible_ssh_private_key_file=.vagrant/machines/server-slave/virtualbox/private_key

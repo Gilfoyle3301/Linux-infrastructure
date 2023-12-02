@@ -1,0 +1,10 @@
+[mysqld]
+log_bin = /var/log/mysql/mysql-bin.log
+server-id = 2
+read_only = 1
+tmpdir = /tmp
+binlog_format = ROW
+max_binlog_size = 800M
+sync_binlog = 1
+expire-logs-days = 5
+slow_query_log = 2

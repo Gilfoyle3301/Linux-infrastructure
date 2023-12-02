@@ -1,0 +1,14 @@
+
+zone "security.lab" {
+type master;
+allow-transfer { key "zonetransfer.key"; };
+file "/etc/bind/named.security.lab";
+};
+
+// lab's zone reverse
+zone "77.168.192.in-addr.arpa" {
+type master;
+allow-transfer { key "zonetransfer.key"; };
+file "/etc/bind/named.security.lab.rev";
+};
+

@@ -1,0 +1,10 @@
+---
+mysql_password: 'uBW94U&8^079'
+remote_dump_path: /vagrant/master.sql
+local_dump_path: /tmp/master.sql
+replication_user: repl
+replication_password: 'uBW94U&8^080'
+mysql_replication_role: 'slave'
+mysql_replication_master: "192.168.77.16"
+master_File: mysql-bin.000002
+# master_Position: "156"

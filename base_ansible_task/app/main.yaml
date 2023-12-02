@@ -1,0 +1,7 @@
+---
+- name: Install nginx
+  hosts: api-gateway
+  vars_files:
+    - ../inventory/group_vars/api-gateway.yml
+  roles: 
+  - nginx

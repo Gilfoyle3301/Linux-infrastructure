@@ -1,0 +1,25 @@
+$TTL 3600
+$ORIGIN 77.168.192.in-addr.arpa.
+77.168.192.in-addr.arpa.  IN      SOA     serverDNS.security.lab. root.security.lab. (
+                            2711201407 ; serial
+                            3600       ; refresh (1 hour)
+                            600        ; retry (10 minutes)
+                            86400      ; expire (1 day)
+                            600        ; minimum (10 minutes)
+                        )
+
+                IN      NS      serverDNS.security.lab.
+
+; security Servers
+10              IN      PTR     frontServer.security.lab.
+11              IN      PTR     serverDNS.security.lab.
+12              IN      PTR     monitoringServer.security.lab.
+13              IN      PTR     logServer.security.lab.
+14              IN      PTR     applicationServer.security.lab.
+15              IN      PTR     applicationSlave.security.lab.
+16              IN      PTR     dataBaseServer.security.lab.
+17              IN      PTR     dataBaseSlave.security.lab.
+10              IN      PTR     cognitoINC.security.lab.
+18              IN      PTR     backupServer.security.lab.
+
+

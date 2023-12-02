@@ -1,0 +1,135 @@
+---
+- hosts: all
+  become: yes
+  tasks:
+  - name: install packages
+    apt:
+      name:
+        - bind9
+        - bind9-utils
+        - dnsutils
+        - ntp
+      state: present
+      update_cache: true
+
+
+- hosts: master
+  become: yes
+  tasks:
+   - name: copy resolv.conf to the servers
+     copy: 
+      src: servers-resolv.conf 
+      dest: /etc/resolv.conf 
+      owner: root 
+      group: root 
+      mode: 0644
+   - name: Add rule to AppArmor
+     copy:
+      src: usr.sbin.named
+      dest: /etc/apparmor.d/local/
+   - name: Apply rule
+     shell:
+      cmd: apparmor_parser -r /etc/apparmor.d/usr.sbin.named
+   - name: Configure ns01
+     copy:
+      src: bind-master/
+      dest: /etc/bind/
+   - name: Create directory
+     file:
+      path: /var/bind/dynamic
+      state: directory
+      owner: root
+      group: bind
+      mode: '0770'
+   - name: Restart named
+     systemd:
+      state: restarted
+      daemon_reload: true
+      name: named
+
+
+
+- hosts: slave
+  become: yes
+  tasks:
+   - name: copy resolv.conf to the servers
+     copy:  
+      src: slave-resolv.conf 
+      dest: /etc/resolv.conf 
+      owner: root 
+      group: root 
+      mode: 0644
+   - name: Add rule to AppArmor
+     copy:
+      src: usr.sbin.named
+      dest: /etc/apparmor.d/local/
+   - name: Apply rule
+     shell:
+      cmd: apparmor_parser -r /etc/apparmor.d/usr.sbin.named
+   - name: Configure ns01
+     copy:
+      src: bind-slave/
+      dest: /etc/bind/
+   - name: Create directory
+     file:
+      path: /var/bind/dynamic
+      state: directory
+      owner: root
+      group: bind
+      mode: '0770'
+   - name: Restart named
+     systemd:
+      state: restarted
+      daemon_reload: true
+      name: named
+
+    
+- hosts: client
+  become: yes
+  tasks:
+  - name: Copy resolv.conf to the client
+    copy: 
+      src: client-resolv.conf 
+      dest: /etc/resolv.conf 
+      owner: root 
+      group: root 
+      mode: 0644
+  - name: Copy rndc conf file
+    copy: 
+      src: rndc.conf 
+      dest: /home/vagrant/rndc.conf 
+      owner: vagrant 
+      group: vagrant 
+      mode: 0644
+  - name: Copy motd to the client
+    copy: 
+      src: client-motd 
+      dest: /etc/bind/motd 
+      owner: root 
+      group: root 
+      mode: 0644
+
+- hosts: client2
+  become: yes
+  tasks:
+  - name: Copy resolv.conf to the client
+    copy: 
+      src: client-resolv.conf 
+      dest: /etc/resolv.conf 
+      owner: root 
+      group: root 
+      mode: 0644
+  - name: Copy rndc conf file
+    copy: 
+      src: rndc.conf 
+      dest: /home/vagrant/rndc.conf 
+      owner: vagrant 
+      group: vagrant 
+      mode: 0644
+  - name: Copy motd to the client
+    copy: 
+      src: client-motd 
+      dest: /etc/bind/motd 
+      owner: root 
+      group: root 
+      mode: 0644

@@ -1,0 +1,55 @@
+
+- name: install borg
+  apt:
+    name:
+      - borgbackup
+      - rsync
+    state: present
+    update_cache: true
+
+- name: create user borg
+  user:
+    name: borg
+    password: "{{ '123456789' | password_hash('sha512') }}"
+    shell: /bin/bash
+    groups: sudo
+    append: yes
+
+- name: create directory backup
+  file:
+    path: /var/backups/{{ item }}
+    owner: borg 
+    group: borg 
+    state: directory
+  with_items: 
+  - application
+  - applicationSlave
+  - databaseserver
+  - databaseslave
+  - serverdns
+  - monitoringserver
+  - front
+
+- name: change permitions
+  file:
+    path: /var/backups
+    owner: borg 
+    group: borg 
+
+- name: copy ssh-data for backup
+  copy:
+    src: ../../../../data/ssh-server/
+    dest: /home/borg/.ssh/
+    owner: borg
+    group: borg
+
+- name: change permitions ssh files
+  file:
+    path: /home/borg/.ssh/{{ item }}
+    owner: borg
+    group: borg
+    mode: 0600
+  with_items: 
+  - authorized_keys
+  - id_rsa
+  - known_hosts

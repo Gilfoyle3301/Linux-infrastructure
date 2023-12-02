@@ -1,0 +1,142 @@
+
+- name: Install packages
+  apt:
+    name:
+      - nginx
+      - auditd 
+      - audispd-plugins
+      - prometheus-nginx-exporter
+      - borgbackup
+    state: present
+    update_cache: true
+  ignore_errors: yes
+
+- name: Clean artifact nginx
+  file:
+    state: absent
+    path: /etc/nginx
+
+- name: Clean artifact audisp
+  file:
+    state: absent
+    path: /etc/audisp
+
+- name: Copy nginx configs
+  copy:
+    src: 'files/etc/nginx'
+    dest: '/etc/'
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Copy nginx exporter configs
+  copy:
+    src: 'files/etc/nginx-exporter'
+    dest: '/etc/default/prometheus-nginx-exporter'
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart prometheus-nginx-exporter
+
+- name: Copy audisp configs
+  copy:
+    src: 'files/etc/audisp'
+    dest: '/etc/'
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Copy auditd configs
+  copy:
+    src: 'files/etc/auditd.conf'
+    dest: '/etc/audit/'
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart auditd
+  
+- name: copy web pages
+  copy:
+    src: files/var/www
+    dest: /var
+    owner: root
+    group: root
+    mode: 0644
+  notify: Restart Nginx
+
+- name: Change rsyslog.conf
+  copy:
+    src: files/etc/rsyslog.conf
+    dest: /etc/rsyslog.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart rsyslog
+
+- name: Copy resolv.conf to the client
+  copy: 
+    src: ../../dns/files/clients/client-resolv.conf 
+    dest: /etc/resolv.conf 
+    owner: root 
+    group: root 
+    mode: 0644
+
+- name: copy ssh-data for backup
+  copy:
+    src: ../../../../data/ssh-clients/
+    dest: /root/.ssh/
+    owner: root
+    group: root
+
+- name: change DAC ssh
+  file:
+    path: /root/.ssh/{{ item }}
+    mode: 0600
+  with_items: 
+    - id_rsa
+    - authorized_keys
+    - known_hosts
+
+- name: copy template service
+  template:
+    src: ../../../../data/borg-backup.service.j2
+    dest: /etc/systemd/system/borg-backup.service
+
+- name: Copy service
+  template:
+    src: ./../../../data/borg-backup.timer
+    dest: /etc/systemd/system/borg-backup.timer
+
+- name: initialize borg if not already done
+  block:
+    - name: check status of borg repo
+      expect:
+        command: borg info borg@192.168.77.18:/var/backups/{{ repolabel }}
+        responses:
+          passphrase: "Cae^53&gd899"
+  rescue:
+  - name: initialize borg
+    expect:
+      command: borg init --encryption=repokey borg@192.168.77.18:/var/backups/{{ repolabel }}
+      responses:
+        passphrase:
+        - "{{ repopass }}"
+        - "{{ repopass }}"
+        - "n"
+        - ""
+
+- name: service reload backup
+  service:
+    name: '{{ item }}'
+    state: reloaded
+  with_items:
+    - borg-backup.service
+    - borg-backup.timer
+
+- name: Start borg-backup service
+  service:
+    name: '{{ item }}'
+    state: started
+  with_items:
+    - borg-backup.service
+    - borg-backup.timer 

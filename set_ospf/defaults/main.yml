@@ -1,0 +1,54 @@
+ospf:
+  daemon:
+    ospf: "yes"
+
+router1:
+  routerid: "1.1.1.1"
+  enp0s8:
+    description: "r1-r2"
+    address: "10.0.10.1/30"
+    neighbor: "10.0.10.2"
+    net: "10.0.10.0/30"
+  enp0s9:
+    description: "r1-r3"
+    address: "10.0.12.1/30"
+    neighbor: "10.0.12.2"
+    net: "10.0.12.0/30"
+  enp0s10:
+    description: "net_router1"
+    address: "192.168.10.1/24"
+    net: "192.168.10.0/24"
+
+router2:
+  routerid: "2.2.2.2"
+  enp0s8:
+    description: "r1-r2"
+    address: "10.0.10.2/30"
+    neighbor: "10.0.10.1"
+    net: "10.0.10.0/30"
+  enp0s9:
+    description: "r2-r3"
+    address: "10.0.11.2"
+    neighbor: "10.0.11.1"
+    net: "10.0.11.0/30"
+  enp0s10:
+    description: "net_router2"
+    address: "192.168.20.1/24"
+    net: "192.168.20.0/24"
+
+router3:
+  routerid: "3.3.3.3"
+  enp0s8:
+    description: "r2-r3"
+    address: "10.0.11.1/30"
+    neighbor: "10.0.11.2"
+    net: "10.0.11.0/30"
+  enp0s9:
+    description: "r1-r3"
+    address: "10.0.12.2/30"
+    neighbor: "10.0.12.1"
+    net: "10.0.12.0/30"
+  enp0s10:
+    description: "net_router3"
+    address: "192.168.30.1/24"
+    net: "192.168.30.0/24"

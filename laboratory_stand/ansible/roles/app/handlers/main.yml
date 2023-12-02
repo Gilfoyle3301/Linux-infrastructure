@@ -1,0 +1,20 @@
+---
+- name: restart php7.4-fpm
+  systemd:
+    name: php7.4-fpm.service
+    state: restarted
+    enabled: yes
+    
+- name: restart rsyslog
+  systemd:
+    name: rsyslog
+    daemon_reload: yes
+    enabled: yes
+    state: restarted
+  
+- name: restart auditd
+  systemd:
+    name: auditd
+    daemon_reload: yes
+    enabled: yes
+    state: restarted

@@ -1,0 +1,30 @@
+include "/etc/bind/named.zonetransfer.key"; 
+server 192.168.50.10 {
+    keys { "zonetransfer.key"; };
+};
+
+// lab's zone
+zone "dns.lab" {
+    type slave;
+    masters { 192.168.50.10; };
+    file "/etc/bind/named.dns.lab";
+};
+
+// lab's zone reverse
+zone "50.168.192.in-addr.arpa" {
+    type slave;
+    masters { 192.168.50.10; };
+    file "/etc/bind/named.dns.lab.rev";
+};
+
+// lab's ddns zone
+zone "ddns.lab" {
+    type slave;
+    masters { 192.168.50.10; };
+    file "/etc/bind/named.ddns.lab";
+};
+zone "newdns.lab" {
+    type slave;
+    masters { 192.168.50.10; };
+    file "/etc/named/named.newdns.lab";
+};

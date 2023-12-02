@@ -1,0 +1,40 @@
+frr version 9.0
+frr defaults traditional
+hostname {{ ansible_hostname }}
+log syslog informational
+service integrated-vtysh-config
+!
+interface enp0s8
+{% if ansible_hostname == "Router1"%}
+ ip ospf cost 1000
+{% elif ansible_hostname == 'router2' and symmetric_routing == true %}
+ ip ospf cost 1000
+{% else %}
+ !ip ospf cost 450
+{% endif %}
+exit
+!
+router ospf
+{% if ansible_hostname == "Router1" %}
+ network {{ router1.network10 }} area 0
+ network {{ router1.network12 }} area 0
+ network {{ router1.network192 }} area 0
+ neighbor {{ router1.neighborRouter2 }}
+ neighbor {{ router1.neighborRouter3 }}
+{% endif %}
+{% if ansible_hostname == "Router2" %}
+ network {{ router2.network10 }} area 0
+ network {{ router2.network11 }} area 0
+ network {{ router2.network192 }} area 0
+ neighbor {{ router2.neighborRouter1 }}
+ neighbor {{ router2.neighborRouter3 }}
+{% endif %}
+{% if ansible_hostname == "Router3" %}
+ network {{ router3.network11 }} area 0
+ network {{ router3.network12 }} area 0
+ network {{ router3.network192 }} area 0
+ neighbor {{ router3.neighborRouter2 }}
+ neighbor {{ router3.neighborRouter1 }}
+{% endif %}
+exit
+!

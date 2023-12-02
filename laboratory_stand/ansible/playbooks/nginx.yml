@@ -1,0 +1,12 @@
+---
+- name: Setup nginx server
+  hosts: frontServer
+  become: True
+  gather_facts: False
+  roles:
+    - role: ../roles/nginx
+      vars:
+        repolabel: front
+        repopass: Cae^53&gd899
+    - ../roles/prometheus-node-exporter
+...

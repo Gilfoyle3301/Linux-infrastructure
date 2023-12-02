@@ -1,0 +1,20 @@
+---
+- name: restart mysql
+  systemd:
+    name: mysql.service
+    state: restarted
+    enabled: yes
+    
+- name: restart rsyslog
+  systemd:
+    name: rsyslog
+    daemon_reload: yes
+    enabled: yes
+    state: restarted
+  
+- name: restart auditd
+  systemd:
+    name: auditd
+    daemon_reload: yes
+    enabled: yes
+    state: restarted

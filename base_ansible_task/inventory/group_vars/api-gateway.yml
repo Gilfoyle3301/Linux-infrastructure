@@ -1,0 +1,5 @@
+nginx:
+  server:
+    port: 8080
+    server_name: localhost
+    ssl_port: 443 ssl

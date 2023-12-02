@@ -1,0 +1,676 @@
+apiVersion: 1
+groups:
+    - orgId: 1
+      name: system
+      folder: Lab Alerts
+      interval: 1m
+      rules:
+        - uid: ee982666-26d7-46e9-810c-aa832f8e262e
+          title: Load Average
+          condition: E
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 3600
+                to: 0
+              datasourceUid: afdc0d86-76c2-4715-a876-2d1ce0f83b21
+              model:
+                calculatedInterval: 10s
+                datasource:
+                    type: prometheus
+                    uid: afdc0d86-76c2-4715-a876-2d1ce0f83b21
+                datasourceErrors: {}
+                errors: {}
+                expr: node_load1{alias=""}
+                format: time_series
+                interval: ""
+                intervalFactor: 1
+                intervalMs: 15000
+                legendFormat: Load 1m
+                maxDataPoints: 43200
+                metric: ""
+                prometheusLink: /api/datasources/proxy/1/graph#%5B%7B%22expr%22%3A%22node_load1%7Balias%3D%5C%22%24host%5C%22%7D%22%2C%22range_input%22%3A%223601s%22%2C%22end_input%22%3A%222015-10-22%2015%3A27%22%2C%22step_input%22%3A%22%22%2C%22stacked%22%3Afalse%2C%22tab%22%3A0%7D%5D
+                refId: A
+                step: 2
+                target: ""
+            - refId: B
+              relativeTimeRange:
+                from: 3600
+                to: 0
+              datasourceUid: afdc0d86-76c2-4715-a876-2d1ce0f83b21
+              model:
+                calculatedInterval: 10s
+                datasource:
+                    type: prometheus
+                    uid: afdc0d86-76c2-4715-a876-2d1ce0f83b21
+                datasourceErrors: {}
+                errors: {}
+                expr: node_load5{alias=""}
+                format: time_series
+                interval: ""
+                intervalFactor: 1
+                intervalMs: 15000
+                legendFormat: Load 5m
+                maxDataPoints: 43200
+                metric: ""
+                prometheusLink: /api/datasources/proxy/1/graph#%5B%7B%22expr%22%3A%22node_load5%7Balias%3D%5C%22%24host%5C%22%7D%22%2C%22range_input%22%3A%223600s%22%2C%22end_input%22%3A%222015-10-22%2015%3A27%22%2C%22step_input%22%3A%22%22%2C%22stacked%22%3Afalse%2C%22tab%22%3A0%7D%5D
+                refId: B
+                step: 2
+                target: ""
+            - refId: C
+              relativeTimeRange:
+                from: 3600
+                to: 0
+              datasourceUid: afdc0d86-76c2-4715-a876-2d1ce0f83b21
+              model:
+                calculatedInterval: 10s
+                datasource:
+                    type: prometheus
+                    uid: afdc0d86-76c2-4715-a876-2d1ce0f83b21
+                datasourceErrors: {}
+                errors: {}
+                expr: node_load15{alias=""}
+                format: time_series
+                interval: ""
+                intervalFactor: 1
+                intervalMs: 15000
+                legendFormat: Load 15m
+                maxDataPoints: 43200
+                metric: ""
+                prometheusLink: /api/datasources/proxy/1/graph#%5B%7B%22expr%22%3A%22node_load15%7Balias%3D%5C%22%24host%5C%22%7D%22%2C%22range_input%22%3A%223600s%22%2C%22end_input%22%3A%222015-10-22%2015%3A27%22%2C%22step_input%22%3A%22%22%2C%22stacked%22%3Afalse%2C%22tab%22%3A0%7D%5D
+                refId: C
+                step: 2
+                target: ""
+            - refId: D
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - D
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: D
+                type: reduce
+            - refId: E
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 0
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - E
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: D
+                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: E
+                type: threshold
+          dashboardUid: "000000001"
+          panelId: 18
+          noDataState: NoData
+          execErrState: Error
+          for: 5m
+          annotations:
+            __dashboardUid__: "000000001"
+            __panelId__: "18"
+          isPaused: false
+        - uid: ca741862-725c-469a-a919-e139ecdeeb90
+          title: Apache Up / Down
+          condition: D
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 300
+                to: 0
+              datasourceUid: afdc0d86-76c2-4715-a876-2d1ce0f83b21
+              model:
+                datasource:
+                    type: prometheus
+                    uid: afdc0d86-76c2-4715-a876-2d1ce0f83b21
+                expr: count(apache_up{instance=~"applicationServer.security.lab:9117"} == 1)
+                format: time_series
+                interval: ""
+                intervalFactor: 1
+                intervalMs: 15000
+                legendFormat: Apache Up
+                maxDataPoints: 43200
+                refId: A
+                step: 240
+            - refId: B
+              relativeTimeRange:
+                from: 300
+                to: 0
+              datasourceUid: afdc0d86-76c2-4715-a876-2d1ce0f83b21
+              model:
+                datasource:
+                    type: prometheus
+                    uid: afdc0d86-76c2-4715-a876-2d1ce0f83b21
+                expr: scalar(count(apache_up{instance=~"applicationServer.security.lab:9117"} == 0))
+                format: time_series
+                interval: ""
+                intervalFactor: 1
+                intervalMs: 15000
+                legendFormat: Apache Down
+                maxDataPoints: 43200
+                refId: B
+                step: 240
+            - refId: C
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: C
+                type: reduce
+            - refId: D
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 1
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - D
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: C
+                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: D
+                type: threshold
+          dashboardUid: a13b7d90-248b-46c5-91b2-0bb7f444a038
+          panelId: 5
+          noDataState: Alerting
+          execErrState: Error
+          for: 1m
+          annotations:
+            __dashboardUid__: a13b7d90-248b-46c5-91b2-0bb7f444a038
+            __panelId__: "5"
+            summary: Die Apach
+          isPaused: false
+        - uid: b0540e67-2dfb-48f3-ba79-3f4b80ac1f27
+          title: Memory
+          condition: E
+          data:
+            - refId: C
+              relativeTimeRange:
+                from: 3600
+                to: 0
+              datasourceUid: afdc0d86-76c2-4715-a876-2d1ce0f83b21
+              model:
+                calculatedInterval: 2s
+                datasource:
+                    type: prometheus
+                    uid: afdc0d86-76c2-4715-a876-2d1ce0f83b21
+                datasourceErrors: {}
+                errors: {}
+                expr: node_memory_MemTotal_bytes{aliasalias=""}
+                format: time_series
+                interval: ""
+                intervalFactor: 1
+                intervalMs: 15000
+                legendFormat: Total
+                maxDataPoints: 43200
+                metric: ""
+                prometheusLink: /api/datasources/proxy/1/graph#%5B%7B%22expr%22%3A%22node_memory_MemFree%7Balias%3D%5C%22%24host%5C%22%7D%20%2B%20node_memory_Buffers%7Balias%3D%5C%22%24host%5C%22%7D%20%2B%20node_memory_Cached%7Balias%3D%5C%22%24host%5C%22%7D%22%2C%22range_input%22%3A%22900s%22%2C%22end_input%22%3A%222015-10-22%2015%3A25%22%2C%22step_input%22%3A%22%22%2C%22stacked%22%3Atrue%2C%22tab%22%3A0%7D%5D
+                refId: C
+                step: 5
+                target: ""
+            - refId: A
+              relativeTimeRange:
+                from: 3600
+                to: 0
+              datasourceUid: afdc0d86-76c2-4715-a876-2d1ce0f83b21
+              model:
+                calculatedInterval: 2s
+                datasource:
+                    type: prometheus
+                    uid: afdc0d86-76c2-4715-a876-2d1ce0f83b21
+                datasourceErrors: {}
+                errors: {}
+                expr: node_memory_MemTotal_bytes{alias=""} - (node_memory_MemAvailable_bytes{alias=""} or (node_memory_MemFree_bytes{alias=""} + node_memory_Buffers_bytes{alias=""} + node_memory_Cached_bytes{alias=""}))
+                format: time_series
+                interval: ""
+                intervalFactor: 1
+                intervalMs: 15000
+                legendFormat: Used
+                maxDataPoints: 43200
+                metric: ""
+                prometheusLink: /api/datasources/proxy/1/graph#%5B%7B%22expr%22%3A%22node_memory_MemTotal%7Balias%3D%5C%22%24host%5C%22%7D%20-%20(node_memory_MemFree%7Balias%3D%5C%22%24host%5C%22%7D%20%2B%20node_memory_Buffers%7Balias%3D%5C%22%24host%5C%22%7D%20%2B%20node_memory_Cached%7Balias%3D%5C%22%24host%5C%22%7D)%22%2C%22range_input%22%3A%22900s%22%2C%22end_input%22%3A%222015-10-22%2015%3A25%22%2C%22step_input%22%3A%22%22%2C%22stacked%22%3Atrue%2C%22tab%22%3A0%7D%5D
+                refId: A
+                step: 5
+                target: ""
+            - refId: B
+              relativeTimeRange:
+                from: 3600
+                to: 0
+              datasourceUid: afdc0d86-76c2-4715-a876-2d1ce0f83b21
+              model:
+                calculatedInterval: 2s
+                datasource:
+                    type: prometheus
+                    uid: afdc0d86-76c2-4715-a876-2d1ce0f83b21
+                datasourceErrors: {}
+                errors: {}
+                expr: node_memory_MemAvailable_bytes{alias=""} or (node_memory_MemFree_bytes{alias=""} + node_memory_Buffers_bytes{alias=""} + node_memory_Cached_bytes{alias=""})
+                format: time_series
+                interval: ""
+                intervalFactor: 1
+                intervalMs: 15000
+                legendFormat: Available
+                maxDataPoints: 43200
+                metric: ""
+                prometheusLink: /api/datasources/proxy/1/graph#%5B%7B%22expr%22%3A%22node_memory_MemFree%7Balias%3D%5C%22%24host%5C%22%7D%20%2B%20node_memory_Buffers%7Balias%3D%5C%22%24host%5C%22%7D%20%2B%20node_memory_Cached%7Balias%3D%5C%22%24host%5C%22%7D%22%2C%22range_input%22%3A%22900s%22%2C%22end_input%22%3A%222015-10-22%2015%3A25%22%2C%22step_input%22%3A%22%22%2C%22stacked%22%3Atrue%2C%22tab%22%3A0%7D%5D
+                refId: B
+                step: 5
+                target: ""
+            - refId: D
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - D
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: D
+                type: reduce
+            - refId: E
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - null
+                            - 1e+07
+                        type: outside_range
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - E
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: D
+                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: E
+                type: threshold
+          dashboardUid: "000000001"
+          panelId: 6
+          noDataState: NoData
+          execErrState: Error
+          for: 1m
+          annotations:
+            __dashboardUid__: "000000001"
+            __panelId__: "6"
+            description: Check nodes
+          isPaused: false
+        - uid: c3b56dd6-263a-4abc-bf8e-ad89e5786c50
+          title: Processes
+          condition: D
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 3600
+                to: 0
+              datasourceUid: afdc0d86-76c2-4715-a876-2d1ce0f83b21
+              model:
+                calculatedInterval: 2m
+                datasource:
+                    type: prometheus
+                    uid: afdc0d86-76c2-4715-a876-2d1ce0f83b21
+                datasourceErrors: {}
+                errors: {}
+                expr: node_procs_running{alias=""}
+                format: time_series
+                interval: ""
+                intervalFactor: 1
+                intervalMs: 15000
+                legendFormat: Processes in runnable state
+                maxDataPoints: 43200
+                metric: ""
+                prometheusLink: /api/datasources/proxy/1/graph#%5B%7B%22expr%22%3A%22node_procs_running%7Balias%3D%5C%22%24host%5C%22%7D%22%2C%22range_input%22%3A%2243200s%22%2C%22end_input%22%3A%222015-9-18%2013%3A46%22%2C%22step_input%22%3A%22%22%2C%22stacked%22%3Atrue%2C%22tab%22%3A0%7D%5D
+                refId: A
+                step: 5
+                target: ""
+            - refId: B
+              relativeTimeRange:
+                from: 3600
+                to: 0
+              datasourceUid: afdc0d86-76c2-4715-a876-2d1ce0f83b21
+              model:
+                calculatedInterval: 2m
+                datasource:
+                    type: prometheus
+                    uid: afdc0d86-76c2-4715-a876-2d1ce0f83b21
+                datasourceErrors: {}
+                errors: {}
+                expr: node_procs_blocked{alias=""}
+                format: time_series
+                interval: ""
+                intervalFactor: 1
+                intervalMs: 15000
+                legendFormat: Processes blocked waiting for I/O to complete
+                maxDataPoints: 43200
+                metric: ""
+                prometheusLink: /api/datasources/proxy/1/graph#%5B%7B%22expr%22%3A%22node_procs_blocked%7Balias%3D%5C%22%24host%5C%22%7D%22%2C%22range_input%22%3A%2243200s%22%2C%22end_input%22%3A%222015-9-18%2013%3A46%22%2C%22step_input%22%3A%22%22%2C%22stacked%22%3Atrue%2C%22tab%22%3A0%7D%5D
+                refId: B
+                step: 5
+                target: ""
+            - refId: C
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: C
+                type: reduce
+            - refId: D
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 3
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - D
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: C
+                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: D
+                type: threshold
+          dashboardUid: "000000001"
+          panelId: 20
+          noDataState: NoData
+          execErrState: Error
+          for: 1m
+          annotations:
+            __dashboardUid__: "000000001"
+            __panelId__: "20"
+          isPaused: false
+        - uid: bc7308d2-0b4b-4afb-94e1-30edcc8a0b08
+          title: Interrupts
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 581
+                to: -19
+              datasourceUid: afdc0d86-76c2-4715-a876-2d1ce0f83b21
+              model:
+                calculatedInterval: 2m
+                datasource:
+                    type: prometheus
+                    uid: afdc0d86-76c2-4715-a876-2d1ce0f83b21
+                datasourceErrors: {}
+                errors: {}
+                expr: rate(node_intr_total{instance="dataBaseServer.security.lab:9100"}[5s]) or irate(node_intr_total{instance="dataBaseServer.security.lab:9100"}[5m])
+                format: time_series
+                interval: ""
+                intervalFactor: 1
+                intervalMs: 15000
+                legendFormat: Interrupts
+                maxDataPoints: 43200
+                metric: ""
+                prometheusLink: /api/datasources/proxy/1/graph#%5B%7B%22expr%22%3A%22node_procs_running%7Balias%3D%5C%22%24host%5C%22%7D%22%2C%22range_input%22%3A%2243200s%22%2C%22end_input%22%3A%222015-9-18%2013%3A46%22%2C%22step_input%22%3A%22%22%2C%22stacked%22%3Atrue%2C%22tab%22%3A0%7D%5D
+                refId: A
+                step: 5
+                target: ""
+            - refId: B
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: B
+                type: reduce
+            - refId: C
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 140
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          dashboardUid: "000000001"
+          panelId: 28
+          noDataState: NoData
+          execErrState: Error
+          for: 1m
+          annotations:
+            __dashboardUid__: "000000001"
+            __panelId__: "28"
+          isPaused: false
+        - uid: f1d0f14b-552c-4706-bfca-bef2d7ab2f2b
+          title: InterruptsSlave
+          condition: C
+          data:
+            - refId: A
+              relativeTimeRange:
+                from: 300
+                to: 0
+              datasourceUid: afdc0d86-76c2-4715-a876-2d1ce0f83b21
+              model:
+                calculatedInterval: 2m
+                datasource:
+                    type: prometheus
+                    uid: afdc0d86-76c2-4715-a876-2d1ce0f83b21
+                datasourceErrors: {}
+                errors: {}
+                expr: rate(node_intr_total{instance="dataBaseSlave.security.lab:9100"}[5s]) or irate(node_intr_total{instance="dataBaseSlave.security.lab:9100"}[5m])
+                format: time_series
+                interval: ""
+                intervalFactor: 1
+                intervalMs: 15000
+                legendFormat: Interrupts
+                maxDataPoints: 43200
+                metric: ""
+                prometheusLink: /api/datasources/proxy/1/graph#%5B%7B%22expr%22%3A%22node_procs_running%7Balias%3D%5C%22%24host%5C%22%7D%22%2C%22range_input%22%3A%2243200s%22%2C%22end_input%22%3A%222015-9-18%2013%3A46%22%2C%22step_input%22%3A%22%22%2C%22stacked%22%3Atrue%2C%22tab%22%3A0%7D%5D
+                refId: A
+                step: 5
+                target: ""
+            - refId: B
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params: []
+                        type: gt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - B
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: A
+                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
+                reducer: last
+                refId: B
+                type: reduce
+            - refId: C
+              datasourceUid: __expr__
+              model:
+                conditions:
+                    - evaluator:
+                        params:
+                            - 500
+                        type: lt
+                      operator:
+                        type: and
+                      query:
+                        params:
+                            - C
+                      reducer:
+                        params: []
+                        type: last
+                      type: query
+                datasource:
+                    type: __expr__
+                    uid: __expr__
+                expression: B
+                hide: false
+                intervalMs: 1000
+                maxDataPoints: 43200
+                refId: C
+                type: threshold
+          dashboardUid: "000000001"
+          panelId: 28
+          noDataState: NoData
+          execErrState: Error
+          for: 1m
+          annotations:
+            __dashboardUid__: "000000001"
+            __panelId__: "28"
+          isPaused: false

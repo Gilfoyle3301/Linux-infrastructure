@@ -1,0 +1,9 @@
+---
+- name: Setup logs server
+  hosts: logServer
+  become: True
+  gather_facts: False
+  roles:
+    - ../roles/logs
+    - ../roles/prometheus-node-exporter
+...

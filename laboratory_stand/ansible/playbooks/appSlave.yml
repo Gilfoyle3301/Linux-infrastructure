@@ -1,0 +1,14 @@
+- name: setup Slave
+  hosts: applicationSlave
+  become: True
+  gather_facts: False
+  roles:
+    - role: ../roles/app
+      vars:
+         ansible_fqdn: applicationSlave.security.lab
+         ssh_src:  defaults/authorized_keys
+         ssh_dest: /home/vagrant/.ssh/
+         sender: false
+         repolabel: applicationSlave
+         repopass: Cae^53&gd899
+    - ../roles/prometheus-node-exporter

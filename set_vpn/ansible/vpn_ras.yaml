@@ -1,0 +1,52 @@
+- name: 'Prepare stands RAS OpenVPN'
+  hosts: vpn
+  gather_facts: true
+  become: yes
+  tasks:
+  - name: install base tools
+    apt:
+      name:
+        - vim
+        - traceroute
+        - tcpdump
+        - net-tools
+        - iperf3
+      state: present
+      update_cache: true
+
+  - name: install openvpn
+    apt:
+      name:
+        - openvpn
+        - easy-rsa
+      state: present
+
+- name: 'Set server RAS OpenVPN'
+  hosts: ras_serv
+  become: yes
+  tasks:
+  - name: extract configs
+    unarchive:
+      src: ../configs/RAS/server_vpn_config.tar.gz
+      dest: /
+
+  - name: 'Start OpenVPN server'
+    systemd:
+      name: openvpn@server
+      state: restarted
+      enabled: yes
+    
+- name: 'Set slave RAS OpenVPN'
+  hosts: ras_client
+  become: yes
+  tasks:
+  - name: extract configs
+    unarchive:
+      src: ../configs/RAS/client_vpn_conf.tar.gz
+      dest: /
+
+  - name: 'Start OpenVPN server'
+    systemd:
+      name: openvpn@client
+      state: restarted
+      enabled: yes

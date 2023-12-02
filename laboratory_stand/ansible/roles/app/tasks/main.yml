@@ -1,0 +1,168 @@
+- name: install packages
+  apt:
+    name:
+      - apache2
+      - php
+      - php-fpm
+      - php-mysqli
+      - php-gd
+      - php-mbstring
+      - libsasl2-2 
+      - ca-certificates 
+      - libsasl2-modules
+      - auditd 
+      - audispd-plugins
+      - prometheus-apache-exporter
+      - borgbackup
+    state: present
+    update_cache: true
+
+- name: copy files of application
+  copy: 
+    src: files/{{ item }}
+    dest: /var/www/html 
+    owner: vagrant 
+    group: vagrant 
+    mode: 0644
+  loop:
+     - bWAPP
+     - evil
+     - bWAPP_intro.pdf
+     - crossdomain.xml
+     - ClientAccessPolicy.xml
+
+- name: Change file ownership, group and permissions
+  ansible.builtin.file:
+    path: /var/www/html/bWAPP/{{ item }}
+    mode: '0777'
+  loop:
+     - passwords
+     - images
+     - documents
+     - logs
+  notify: restart php7.4-fpm
+
+
+- name: Set Postfix option hostname
+  debconf: name=postifx question="postfix/mailname" value="{{ansible_fqdn}}" vtype="string"
+
+- name: Set Postfix option type as internet site
+  debconf: name=postfix question="postfix/main_mailer_type" value="'Internet Site'" vtype="string"
+
+- name: Install Postfix
+  apt: package={{ item }} state=present force=yes update_cache=yes cache_valid_time=3600
+  with_items:
+    - postfix
+    - mailutils
+
+- name: Clean artifact audisp
+  file:
+    state: absent
+    path: /etc/audisp
+
+- name: Copy audisp configs
+  copy:
+    src: 'files/etc/audisp'
+    dest: '/etc/'
+    owner: root
+    group: root
+    mode: 0644
+
+- name: Copy auditd configs
+  copy:
+    src: 'files/etc/auditd.conf'
+    dest: '/etc/audit/'
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart auditd
+
+
+- name: Change rsyslog.conf
+  copy:
+    src: files/etc/rsyslog.conf
+    dest: /etc/rsyslog.conf
+    owner: root
+    group: root
+    mode: 0644
+  notify: restart rsyslog
+
+- name: Copy resolv.conf to the client
+  copy: 
+    src: ../../dns/files/clients/client-resolv.conf 
+    dest: /etc/resolv.conf 
+    owner: root 
+    group: root 
+    mode: 0644
+
+- name: Creates a cron file under /etc/cron.d
+  cron:
+    name: sync
+    weekday: 0
+    minute: 0
+    hour: 0
+    user: vagrant
+    job: "rsync -avH --progress --delete /var/www/html/ vagrant@applicationServer.security:/var/www/html/"
+  when: sender
+
+
+- name: copy ssh-data for backup
+  copy:
+    src: ../../../../data/ssh-clients/
+    dest: /root/.ssh/
+    owner: root
+    group: root
+
+- name: change DAC ssh
+  file:
+    path: /root/.ssh/{{ item }}
+    mode: 0600
+  with_items: 
+    - id_rsa
+    - authorized_keys
+    - known_hosts
+
+
+- name: copy template service
+  template:
+    src: ../../../../data/borg-backup.service.j2
+    dest: /etc/systemd/system/borg-backup.service
+
+- name: Copy service
+  template:
+    src: ./../../../data/borg-backup.timer
+    dest: /etc/systemd/system/borg-backup.timer
+
+- name: initialize borg if not already done
+  block:
+    - name: check status of borg repo
+      expect:
+        command: borg info borg@192.168.77.18:/var/backups/{{ repolabel }}
+        responses:
+          passphrase: "Cae^53&gd899"
+  rescue:
+  - name: initialize borg
+    expect:
+      command: borg init --encryption=repokey borg@192.168.77.18:/var/backups/{{ repolabel }}
+      responses:
+        passphrase:
+        - "{{ repopass }}"
+        - "{{ repopass }}"
+        - "n"
+        - ""
+
+- name: service reload backup
+  service:
+    name: '{{ item }}'
+    state: reloaded
+  with_items:
+    - borg-backup.service
+    - borg-backup.timer
+
+- name: Start borg-backup service
+  service:
+    name: '{{ item }}'
+    state: started
+  with_items:
+    - borg-backup.service
+    - borg-backup.timer 

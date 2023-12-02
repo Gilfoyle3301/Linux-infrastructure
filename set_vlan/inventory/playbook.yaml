@@ -1,0 +1,18 @@
+---
+- name: Configure bond0
+  hosts: router
+  become: yes
+  roles: 
+  - centos_router
+
+- name: Configure vlan1
+  hosts: vlan1
+  become: yes
+  roles:
+  - centos_vlan1
+
+- name: Configure vlan2
+  hosts: vlan2
+  become: yes
+  roles:
+  - debian_vlan2

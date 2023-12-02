@@ -1,0 +1,12 @@
+- name: setup master
+  hosts: dataBaseSlave
+  become: True
+  gather_facts: False
+  vars_files:
+    - ../roles/databaseSlave/files/global_vars_slave.yml
+  roles:
+    - role: ../roles/databaseSlave
+      vars:
+        repolabel: databaseslave
+        repopass: Cae^53&gd899
+    - ../roles/prometheus-node-exporter

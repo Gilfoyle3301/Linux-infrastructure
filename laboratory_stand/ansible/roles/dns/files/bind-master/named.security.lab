@@ -1,0 +1,23 @@
+$TTL 3600
+$ORIGIN security.lab.
+@               IN      SOA     serverDNS.security.lab. root.security.lab. (
+                            2711201407 ; serial
+                            3600       ; refresh (1 hour)
+                            600        ; retry (10 minutes)
+                            86400      ; expire (1 day)
+                            600        ; minimum (10 minutes)
+                        )
+
+                IN      NS      serverDNS.security.lab.
+
+; security Servers
+serverDNS           IN      A      192.168.77.11
+frontServer         IN      A      192.168.77.10
+monitoringServer    IN      A      192.168.77.12
+logServer           IN      A      192.168.77.13
+applicationServer   IN      A      192.168.77.14
+applicationSlave    IN      A      192.168.77.15
+dataBaseServer      IN      A      192.168.77.16
+dataBaseSlave       IN      A      192.168.77.17
+cognitoINC          IN      A      192.168.77.10
+backupServer        IN      A      192.168.77.18

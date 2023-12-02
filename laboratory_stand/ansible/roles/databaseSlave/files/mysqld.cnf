@@ -1,0 +1,15 @@
+[mysqld]
+user = mysql
+pid-file = /var/run/mysqld/mysqld.pid
+socket = /var/run/mysqld/mysqld.sock
+datadir = /var/lib/mysql
+log-error = /var/log/mysql/error.log
+server-id = 1
+log-bin = /var/log/mysql/mysql-bin.log
+tmpdir = /tmp
+binlog_format = ROW
+max_binlog_size = 800M
+sync_binlog = 1
+expire-logs-days = 5
+slow_query_log=1
+slow_query_log_file=/var/lib/mysql/mysqld-slow.log

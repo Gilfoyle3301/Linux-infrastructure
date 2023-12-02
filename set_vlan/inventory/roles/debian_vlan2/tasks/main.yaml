@@ -1,0 +1,14 @@
+ - name: install softs on Debian-based
+   apt:
+     name: 
+       - vim
+       - traceroute
+       - tcpdump
+       - net-tools
+     state: present
+     update_cache: true
+   when: (ansible_os_family == "Debian")
+
+
+ - name: Include task
+   include_tasks: configure.yaml

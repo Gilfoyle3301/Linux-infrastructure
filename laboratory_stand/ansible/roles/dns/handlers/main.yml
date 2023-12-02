@@ -1,0 +1,19 @@
+- name: Restart named
+  systemd:
+    state: restarted
+    daemon_reload: true
+    name: named
+
+- name: restart rsyslog
+  systemd:
+    name: rsyslog
+    daemon_reload: yes
+    enabled: yes
+    state: restarted
+  
+- name: restart auditd
+  systemd:
+    name: auditd
+    daemon_reload: yes
+    enabled: yes
+    state: restarted

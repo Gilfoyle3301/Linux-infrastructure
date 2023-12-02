@@ -1,0 +1,13 @@
+Package: nginx-dbgsym
+Package-Type: ddeb
+Source: nginx
+Version: 1.25.0
+Auto-Built-Package: debug-symbols
+Architecture: amd64
+Maintainer: Gilfoyle <otus@gmail.com>
+Installed-Size: 1871
+Depends: nginx (= 1.25.0)
+Section: debug
+Priority: optional
+Description: debug symbols for nginx
+Build-Ids: 3a51ac481717f57f53bfafcea0d57af2b157dbbf
